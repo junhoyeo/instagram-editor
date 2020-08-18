@@ -1,13 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import { usePalette } from 'react-palette';
+import styled, { css } from 'styled-components';
 
 import { ReactComponent as MoreIcon } from '../assets/more.svg';
 import { ReactComponent as LikeIcon } from '../assets/like.svg';
 import { ReactComponent as SaveIcon } from '../assets/save.svg';
 
+const IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1300&q=80';
+
 const Preview: React.FC = () => {
+  const { data } = usePalette(IMAGE_URL);
+
   return (
-    <Wrapper>
+    <Wrapper
+      backgroundColor={data.lightMuted}
+    >
       <PostContainer>
         <PostHeader>
           <CreatorProfileImage src="https://scontent-ort2-2.cdninstagram.com/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-ort2-2.cdninstagram.com&_nc_ohc=NnGlYC0XQtAAX_1dvbz&oh=f2b034057d9f9cdb79563e08191b3c56&oe=5F66BB0F&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2" />
@@ -15,7 +22,7 @@ const Preview: React.FC = () => {
           <FollowButton>팔로잉</FollowButton>
           <MoreButton />
         </PostHeader>
-        <PostImage src="https://images.unsplash.com/photo-1565700430899-1c56a5cf64e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2249&q=80" />
+        <PostImage src={IMAGE_URL} />
         <PostContent>
           <PostReactionBar>
             <LikeButton />
@@ -38,13 +45,21 @@ const Preview: React.FC = () => {
 
 export default Preview;
 
-const Wrapper = styled.div`
+interface IWrapper {
+  backgroundColor?: string;
+}
+
+const Wrapper = styled.div<IWrapper>`
   width: 50vw;
   min-height: 100%;
-  background-color: #f8f9fa;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.8s linear;
+
+  ${({ backgroundColor = '#f8f9fa' }) => backgroundColor && css`
+    background-color: ${backgroundColor};
+  `};
 `;
 
 const PostContainer = styled.div`
@@ -53,7 +68,7 @@ const PostContainer = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.05);
 `;
 
 const PostHeader = styled.div`
