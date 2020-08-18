@@ -4,6 +4,13 @@ import { normalize } from 'styled-normalize';
 export default createGlobalStyle`
   ${normalize}
 
+  @font-face {
+    font-family: 'RIDIBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   * {
     box-sizing: border-box;
     user-select: none;
@@ -35,7 +42,8 @@ export default createGlobalStyle`
   }
 
   input,
-  button {
+  button,
+  textarea {
     background-color: transparent;
     border: 0;
 
