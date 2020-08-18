@@ -21,6 +21,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    height: 35vh;
+  }
 `;
 
 const Textarea = styled.textarea`

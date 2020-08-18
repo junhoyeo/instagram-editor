@@ -15,4 +15,9 @@ const Wrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
+
+  @media screen and (max-width: 1000px) {
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
 `;

@@ -57,6 +57,11 @@ const Wrapper = styled.div<IWrapper>`
   align-items: center;
   transition: background-color 0.8s linear;
 
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    height: 65vh;
+  }
+
   ${({ backgroundColor = '#f8f9fa' }) => backgroundColor && css`
     background-color: ${backgroundColor};
   `};
