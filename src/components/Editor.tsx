@@ -34,4 +34,18 @@ const Textarea = styled.textarea`
   height: 80%;
   width: 80%;
   line-height: 1.5;
+
+  @media screen and (max-width: 1000px) {
+    font-size: 1.35rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    font-size: 18px;
+    height: 85%;
+    width: 85%;
+  }
+
+  @media screen and (max-width: 360px) {
+    font-size: 16px;
+  }
 `;
