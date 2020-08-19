@@ -1,13 +1,22 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
+import { articleState } from '../state/article';
+
 const Editor: React.FC = () => {
+  const [article, setArticle] = useRecoilState(articleState);
+
+  const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setArticle(event.target.value);
+
   return (
     <Wrapper>
       <Textarea
+        value={article}
+        onChange={onChangeText}
         placeholder="당신의 이야기는 무엇인가요?"
-      >
-      </Textarea>
+      />
     </Wrapper>
   );
 };

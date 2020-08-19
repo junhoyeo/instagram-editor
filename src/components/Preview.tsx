@@ -1,6 +1,9 @@
 import React from 'react';
 import { usePalette } from 'react-palette';
+import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
+
+import { articlePreviewState } from '../state/article';
 
 import { ReactComponent as MoreIcon } from '../assets/more.svg';
 import { ReactComponent as LikeIcon } from '../assets/like.svg';
@@ -10,6 +13,7 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?
 
 const Preview: React.FC = () => {
   const { data } = usePalette(IMAGE_URL);
+  const articlePreviewText = useRecoilValue(articlePreviewState);
 
   return (
     <ScrollContainer
@@ -36,7 +40,7 @@ const Preview: React.FC = () => {
             </LikeStatusContainer>
             <ArticleWrapper>
               <strong>jyeo_official</strong>
-              &nbsp;{'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+              &nbsp;{articlePreviewText}
             </ArticleWrapper>
           </PostContent>
         </PostContainer>
@@ -193,6 +197,7 @@ const ArticleWrapper = styled.div`
   overflow-wrap: break-word;
   vertical-align: baseline;
   margin-bottom: 4px;
+  white-space: pre-wrap;
 
   strong {
     font-weight: 600;

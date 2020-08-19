@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-palette": "^1.0.2",
     "react-scripts": "3.4.3",
+    "recoil": "^0.0.10",
     "styled-components": "^5.1.1",
     "styled-normalize": "^8.0.7"
   },
