@@ -43,6 +43,7 @@ const Textarea = styled.textarea`
   height: 80%;
   width: 80%;
   line-height: 1.5;
+  resize: none;
 
   @media screen and (max-width: 1000px) {
     font-size: 1.35rem;
@@ -50,7 +51,7 @@ const Textarea = styled.textarea`
 
   @media screen and (max-width: 500px) {
     font-size: 18px;
-    height: 85%;
+    height: 80%;
     width: 85%;
   }
 
