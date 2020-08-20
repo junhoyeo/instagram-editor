@@ -58,7 +58,6 @@ interface IScrollContainer {
 const ScrollContainer = styled.div<IScrollContainer>`
   width: 50vw;
   min-height: 100%;
-  padding: 30px 0;
 
   @media screen and (max-width: 1000px) {
     width: 100%;
@@ -67,6 +66,11 @@ const ScrollContainer = styled.div<IScrollContainer>`
 
   @media screen and (max-height: 1000px) {
     overflow-x: auto;
+    padding: 50px 0;
+
+    @media screen and (max-width: 450px) {
+      padding: 30px 0;
+    }
   }
 
   ${({ backgroundColor = '#f8f9fa' }) => backgroundColor && css`
@@ -145,8 +149,7 @@ const PostImage = styled.img`
   width: 375px;
   height: 375px;
 
-  @media screen and (max-width: 450px),
-    screen and (max-height: 1000px) {
+  @media screen and (max-width: 450px) {
     width: 280px;
     height: 280px;
   }
