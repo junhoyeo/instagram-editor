@@ -58,6 +58,9 @@ interface IScrollContainer {
 const ScrollContainer = styled.div<IScrollContainer>`
   width: 50vw;
   min-height: 100%;
+  max-height: 100vh;
+  overflow-x: auto;
+  padding: 40px 0;
 
   @media screen and (max-width: 1000px) {
     width: 100%;
@@ -65,7 +68,6 @@ const ScrollContainer = styled.div<IScrollContainer>`
   }
 
   @media screen and (max-height: 1000px) {
-    overflow-x: auto;
     padding: 50px 0;
 
     @media screen and (max-width: 450px) {
@@ -89,7 +91,6 @@ const Wrapper = styled.div`
 
 const PostContainer = styled.div`
   width: 375px;
-  max-height: 600px;
   background-color: white;
   display: flex;
   flex-direction: column;
