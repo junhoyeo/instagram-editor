@@ -6,6 +6,8 @@ import {
 export const articleState = atom({
   key: 'articleState',
   default: '',
+  // @ts-ignore
+  persistence_UNSTABLE: { type: true },
 });
 
 export const articlePreviewState = selector({
