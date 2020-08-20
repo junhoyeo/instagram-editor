@@ -9,14 +9,15 @@ import {
 
 import { articleState } from '../state/article';
 
+const ATOMS_IN_STATE = [articleState];
+
 const initializeState = ({ set }: MutableSnapshot) => {
-  const atoms = [articleState];
-  atoms.forEach((atom) => {
-    const persistedState = localStorage.getItem(atom.key)
+  ATOMS_IN_STATE.forEach((atom) => {
+    const persistedState = localStorage.getItem(atom.key);
     if (persistedState) {
       set(atom, JSON.parse(persistedState).value);
     }
-  })
+  });
 };
 
 function PersistenceObserver() {
