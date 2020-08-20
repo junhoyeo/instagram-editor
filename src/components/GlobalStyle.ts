@@ -25,6 +25,10 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   body {
     margin: 0;
     word-break: keep-all;
