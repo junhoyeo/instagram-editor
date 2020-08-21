@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { usePalette } from 'react-palette';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
 
-import { articlePreviewState } from '../state/article';
+import {
+  articlePreviewState,
+  articleTextState,
+} from '../state/article';
 
 import { ReactComponent as MoreIcon } from '../assets/more.svg';
 import { ReactComponent as LikeIcon } from '../assets/like.svg';
@@ -13,7 +16,17 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?
 
 const Preview: React.FC = () => {
   const { data } = usePalette(IMAGE_URL);
+
+  const [isViewMoreEnabled, setIsViewMoreEnabled] = useState<boolean>(false);
   const articlePreviewText = useRecoilValue(articlePreviewState);
+  const articleText = useRecoilValue(articleTextState);
+
+  const article = isViewMoreEnabled
+    ? articleText
+    : articlePreviewText;
+
+  const onClickViewMoreButton = () =>
+    setIsViewMoreEnabled(!isViewMoreEnabled);
 
   return (
     <ScrollContainer
@@ -40,7 +53,13 @@ const Preview: React.FC = () => {
             </LikeStatusContainer>
             <ArticleWrapper>
               <strong>jyeo_official</strong>
-              &nbsp;{articlePreviewText}
+              &nbsp;{article}
+              &nbsp;
+              <ViewMoreButton
+                onClick={onClickViewMoreButton}
+              >
+                {isViewMoreEnabled ? '숨기기' : '더 보기'}
+              </ViewMoreButton>
             </ArticleWrapper>
           </PostContent>
         </PostContainer>
@@ -209,4 +228,10 @@ const ArticleWrapper = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+`;
+
+const ViewMoreButton = styled.button`
+  color: #8e8e8e;
+  cursor: pointer;
+  padding: 0;
 `;
