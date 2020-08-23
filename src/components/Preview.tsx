@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { usePalette } from 'react-palette';
 import { useRecoilValue } from 'recoil';
 import styled, { css } from 'styled-components';
@@ -12,10 +13,11 @@ import { ReactComponent as MoreIcon } from '../assets/more.svg';
 import { ReactComponent as LikeIcon } from '../assets/like.svg';
 import { ReactComponent as SaveIcon } from '../assets/save.svg';
 
-const IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1300&q=80';
+const DEFAULT_IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1300&q=80';
 
 const Preview: React.FC = () => {
-  const { data } = usePalette(IMAGE_URL);
+  const [imageURL, setImageURL] = useState<string>(DEFAULT_IMAGE_URL);
+  const { data } = usePalette(imageURL);
 
   const [isViewMoreEnabled, setIsViewMoreEnabled] = useState<boolean>(false);
   const articlePreviewText = useRecoilValue(articlePreviewState);
@@ -27,6 +29,26 @@ const Preview: React.FC = () => {
 
   const onClickViewMoreButton = () =>
     setIsViewMoreEnabled(!isViewMoreEnabled);
+
+  const onDrop = useCallback((acceptedFiles: any[]) => {
+    const file = acceptedFiles[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const arrayBuffer = reader.result;
+      if (arrayBuffer) {
+        const blob = new Blob([arrayBuffer], {type: 'image/png'});
+        const src = URL.createObjectURL(blob);
+        console.log(src);
+        setImageURL(src);
+      }
+    }
+
+    reader.readAsArrayBuffer(file);
+  }, [])
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+  });
 
   return (
     <ScrollContainer
@@ -40,7 +62,12 @@ const Preview: React.FC = () => {
             <FollowButton>팔로잉</FollowButton>
             <MoreButton />
           </PostHeader>
-          <PostImage src={IMAGE_URL} />
+          <div
+            {...getRootProps()}
+          >
+            <input {...getInputProps()} />
+            <PostImage src={imageURL} />
+          </div>
           <PostContent>
             <PostReactionBar>
               <LikeButton />
@@ -168,6 +195,7 @@ const MoreButton = styled(MoreIcon)`
 const PostImage = styled.img`
   width: 375px;
   height: 375px;
+  object-fit: cover;
 
   @media screen and (max-width: 450px) {
     width: 280px;
