@@ -85,6 +85,7 @@ const ScrollContainer = styled.div<IScrollContainer>`
   max-height: 100vh;
   overflow-x: auto;
   padding: 40px 0;
+  transition: background-color 0.8s linear;
 
   @media screen and (max-width: 1000px) {
     width: 100%;
@@ -110,7 +111,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.8s linear;
 `;
 
 const PostContainer = styled.div`
