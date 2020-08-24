@@ -7,6 +7,7 @@ import {
   ButtonGroupContainer,
   ReplaceBlankLineButton,
   CopyButton,
+  SettingButton,
 } from './buttons';
 
 const Editor: React.FC = () => {
@@ -34,6 +35,7 @@ const Editor: React.FC = () => {
           <CopyButton
             onClick={onClickCopyArticle}
           />
+          <SettingButton />
         </ButtonGroupContainer>
         <Textarea
           ref={textareaRef}
