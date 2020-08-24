@@ -1,24 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ReactComponent as AlignLeftSolidIcon } from '../assets/align-left-solid.svg';
-
-interface IReplaceBlankLineButton {
+interface IEditorButton {
+  icon: string;
+  className?: string;
+  name?: string;
   onClick?: () => void;
 }
 
-const ReplaceBlankLineButton: React.FC<IReplaceBlankLineButton> = ({ onClick }) => {
+const EditorButton: React.FC<IEditorButton> = ({ icon, className, name, onClick }) => {
   return (
     <Container
+      className={className}
       onClick={onClick}
     >
-      <Icon />
-      <Name>개행 변환</Name>
+      <Icon src={icon} />
+      <Name>
+        {name}
+      </Name>
     </Container>
   );
 };
 
-export default ReplaceBlankLineButton;
+export default EditorButton;
 
 const Container = styled.div`
   display: flex;
@@ -27,7 +31,6 @@ const Container = styled.div`
   background-color: #dee2e6;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: auto;
   width: fit-content;
   font-size: 16px;
   margin-bottom: 16px;
@@ -48,7 +51,7 @@ const Container = styled.div`
   }
 `;
 
-const Icon = styled(AlignLeftSolidIcon)`
+const Icon = styled.img`
   width: 18px;
   height: 18px;
 

@@ -36,9 +36,9 @@ export const articleTextState = selector({
   key: 'articleTextState',
   get: ({ get }) => {
     const article = get(articleState);
-    return article;
-      // .split('\n')
-      // // .filter((isLineNotEmpty) => isLineNotEmpty)
-      // .join('\n');
+    return article
+      .split('\n')
+      .filter((isLineNotEmpty) => isLineNotEmpty)
+      .join('\n');
   },
 });

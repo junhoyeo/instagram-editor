@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { articleState } from '../state/article';
-import ReplaceBlankLineButton from './ReplaceBlankLineButton';
+import {
+  ButtonGroupContainer,
+  ReplaceBlankLineButton,
+  CopyButton,
+} from './buttons';
 
 const Editor: React.FC = () => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [article, setArticle] = useRecoilState(articleState);
 
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
@@ -14,13 +19,24 @@ const Editor: React.FC = () => {
   const onClickReplaceBlankLine = () =>
     setArticle(article.replace(/\n\n/g, '\n⠀\n'));
 
+  const onClickCopyArticle = () => {
+    textareaRef.current?.select();
+    document.execCommand('copy');
+  };
+
   return (
     <Wrapper>
       <Container>
-        <ReplaceBlankLineButton
-          onClick={onClickReplaceBlankLine}
-        />
+        <ButtonGroupContainer>
+          <ReplaceBlankLineButton
+            onClick={onClickReplaceBlankLine}
+          />
+          <CopyButton
+            onClick={onClickCopyArticle}
+          />
+        </ButtonGroupContainer>
         <Textarea
+          ref={textareaRef}
           value={article}
           onChange={onChangeText}
           placeholder="당신의 이야기는 무엇인가요?"
