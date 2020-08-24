@@ -10,7 +10,8 @@ import {
 import ImagePreview from './ImagePreview';
 
 import { ReactComponent as MoreIcon } from '../../assets/more.svg';
-import { ReactComponent as LikeIcon } from '../../assets/like.svg';
+import likeIcon from '../../assets/like.svg';
+import cancelLikeIcon from '../../assets/cancel-like.svg';
 import { ReactComponent as SaveIcon } from '../../assets/save.svg';
 
 const DEFAULT_IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1300&q=80';
@@ -19,6 +20,7 @@ const Preview: React.FC = () => {
   const [imageURL, setImageURL] = useState<string>(DEFAULT_IMAGE_URL);
   const { data } = usePalette(imageURL);
 
+  const [isPostLiked, setIsPostLiked] = useState<boolean>(false);
   const [isViewMoreEnabled, setIsViewMoreEnabled] = useState<boolean>(false);
   const articlePreviewText = useRecoilValue(articlePreviewState);
   const articleText = useRecoilValue(articleTextState);
@@ -29,6 +31,8 @@ const Preview: React.FC = () => {
 
   const onClickViewMoreButton = () =>
     setIsViewMoreEnabled(!isViewMoreEnabled);
+
+  const onClickToggleIsPostLiked = () => setIsPostLiked(!isPostLiked);
 
   return (
     <ScrollContainer
@@ -48,7 +52,10 @@ const Preview: React.FC = () => {
           />
           <PostContent>
             <PostReactionBar>
-              <LikeButton />
+              <LikeButton
+                src={isPostLiked ? cancelLikeIcon : likeIcon}
+                onClick={onClickToggleIsPostLiked}
+              />
               <SaveButton />
             </PostReactionBar>
             <LikeStatusContainer>
@@ -182,7 +189,7 @@ const PostReactionBar = styled.div`
   padding-bottom: 8px;
 `;
 
-const LikeButton = styled(LikeIcon)`
+const LikeButton = styled.img`
   height: 24;
   width: 24;
 `;
