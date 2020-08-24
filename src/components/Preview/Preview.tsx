@@ -35,6 +35,7 @@ const Preview: React.FC = () => {
   const onClickToggleIsPostLiked = () => setIsPostLiked(!isPostLiked);
 
   const isViewMoreButtonShown = articlePreviewText.endsWith('...');
+  console.log('ARTICLE', JSON.stringify(article));
 
   return (
     <ScrollContainer

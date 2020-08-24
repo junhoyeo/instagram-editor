@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import { articleState } from '../state/article';
+import ReplaceBlankLineButton from './ReplaceBlankLineButton';
 
 const Editor: React.FC = () => {
   const [article, setArticle] = useRecoilState(articleState);
@@ -10,13 +11,21 @@ const Editor: React.FC = () => {
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
     setArticle(event.target.value);
 
+  const onClickReplaceBlankLine = () =>
+    setArticle(article.replace(/\n\n/g, '\n⠀\n'));
+
   return (
     <Wrapper>
-      <Textarea
-        value={article}
-        onChange={onChangeText}
-        placeholder="당신의 이야기는 무엇인가요?"
-      />
+      <Container>
+        <ReplaceBlankLineButton
+          onClick={onClickReplaceBlankLine}
+        />
+        <Textarea
+          value={article}
+          onChange={onChangeText}
+          placeholder="당신의 이야기는 무엇인가요?"
+        />
+      </Container>
     </Wrapper>
   );
 };
@@ -28,6 +37,7 @@ const Wrapper = styled.div`
   min-height: 100%;
   background-color: #e9ecef;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
@@ -37,13 +47,23 @@ const Wrapper = styled.div`
   }
 `;
 
+const Container = styled.div`
+  height: 80%;
+  width: 80%;
+
+  @media screen and (max-width: 500px) {
+    height: 80%;
+    width: 85%;
+  }
+`;
+
 const Textarea = styled.textarea`
   font-size: 1.5rem;
   font-family: 'RIDIBatang', serif;
-  height: 80%;
-  width: 80%;
   line-height: 1.5;
   resize: none;
+  width: 100%;
+  height: inherit;
 
   @media screen and (max-width: 1000px) {
     font-size: 1.35rem;
@@ -51,8 +71,6 @@ const Textarea = styled.textarea`
 
   @media screen and (max-width: 500px) {
     font-size: 18px;
-    height: 80%;
-    width: 85%;
   }
 
   @media screen and (max-width: 360px) {
