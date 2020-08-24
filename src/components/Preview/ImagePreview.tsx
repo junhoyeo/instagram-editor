@@ -12,11 +12,11 @@ const ImagePreview: React.FC<IImagePreview> = ({
   setImageURL,
 }) => {
   const onDrop = useCallback((acceptedFiles: any[]) => {
-    const file = acceptedFiles[0];
+    const [file] = acceptedFiles;
     const reader = new FileReader();
 
     reader.onload = () => {
-      const arrayBuffer = reader.result;
+      const { result: arrayBuffer } = reader;
       if (arrayBuffer) {
         const blob = new Blob([arrayBuffer], { type: 'image/png' });
         const src = URL.createObjectURL(blob);
