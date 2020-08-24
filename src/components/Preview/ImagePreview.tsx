@@ -54,6 +54,7 @@ const PostImage = styled.img`
   width: 375px;
   height: 375px;
   object-fit: cover;
+  cursor: pointer;
 
   @media screen and (max-width: 450px) {
     width: 280px;

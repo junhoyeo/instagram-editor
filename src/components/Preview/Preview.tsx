@@ -35,7 +35,6 @@ const Preview: React.FC = () => {
   const onClickToggleIsPostLiked = () => setIsPostLiked(!isPostLiked);
 
   const isViewMoreButtonShown = articlePreviewText.endsWith('...');
-  console.log('ARTICLE', JSON.stringify(article));
 
   return (
     <ScrollContainer
@@ -167,6 +166,7 @@ const CreatorName = styled.span`
 
 const FollowButton = styled.span`
   font-weight: 600;
+  cursor: pointer;
 
   &::before {
     content: '•';
@@ -180,6 +180,7 @@ const MoreButton = styled(MoreIcon)`
   margin-left: auto;
   height: 16;
   width: 16;
+  cursor: pointer;
 `;
 
 const PostContent = styled.div`
@@ -197,11 +198,13 @@ const PostReactionBar = styled.div`
 const LikeButton = styled.img`
   height: 24;
   width: 24;
+  cursor: pointer;
 `;
 
 const SaveButton = styled(SaveIcon)`
   height: 24;
   width: 24;
+  cursor: pointer;
 `;
 
 const LikeStatusContainer = styled.div`

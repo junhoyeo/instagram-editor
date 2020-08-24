@@ -14,7 +14,7 @@ const Editor: React.FC = () => {
   const [article, setArticle] = useRecoilState(articleState);
 
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setArticle(event.target.value.trim());
+    setArticle(event.target.value);
 
   const onClickReplaceBlankLine = () =>
     setArticle(article.replace(/\n\n/g, '\n⠀\n'));
