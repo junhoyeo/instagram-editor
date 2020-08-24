@@ -44,6 +44,7 @@ const ImagePreview: React.FC<IImagePreview> = ({
 export default ImagePreview;
 
 const DropzoneContainer = styled.div`
+  outline: none;
 `;
 
 const DropzoneInput = styled.input`
