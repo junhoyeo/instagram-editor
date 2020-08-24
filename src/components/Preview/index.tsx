@@ -34,6 +34,8 @@ const Preview: React.FC = () => {
 
   const onClickToggleIsPostLiked = () => setIsPostLiked(!isPostLiked);
 
+  const isViewMoreButtonShown = articlePreviewText.endsWith('...');
+
   return (
     <ScrollContainer
       backgroundColor={data.lightMuted}
@@ -67,11 +69,13 @@ const Preview: React.FC = () => {
               <strong>jyeo_official</strong>
               &nbsp;{article}
               &nbsp;
-              <ViewMoreButton
-                onClick={onClickViewMoreButton}
-              >
-                {isViewMoreEnabled ? '숨기기' : '더 보기'}
-              </ViewMoreButton>
+              {isViewMoreButtonShown && (
+                <ViewMoreButton
+                  onClick={onClickViewMoreButton}
+                >
+                  {isViewMoreEnabled ? '숨기기' : '더 보기'}
+                </ViewMoreButton>
+              )}
             </ArticleWrapper>
           </PostContent>
         </PostContainer>
