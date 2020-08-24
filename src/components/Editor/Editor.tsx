@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { articleState } from '../state/article';
+import { articleState } from '../../state/article';
 import {
   ButtonGroupContainer,
   ReplaceBlankLineButton,

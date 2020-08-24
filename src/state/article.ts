@@ -1,7 +1,4 @@
-import {
-  atom,
-  selector,
-} from 'recoil';
+import { atom, selector } from 'recoil';
 
 const CHARACTER_LIMIT_FOR_FIRST_LINE = 120;
 

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import EditorButton from './EditorButton';
 
-import alignLeftSolidIcon from '../assets/align-left-solid.svg';
-import copyRegularIcon from '../assets/copy-regular.svg';
+import alignLeftSolidIcon from '../../assets/align-left-solid.svg';
+import copyRegularIcon from '../../assets/copy-regular.svg';
 
 export const ButtonGroupContainer = styled.div`
   display: flex;
