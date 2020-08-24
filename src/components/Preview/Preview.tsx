@@ -9,15 +9,18 @@ import {
 } from '../../state/article';
 import ImagePreview from './ImagePreview';
 
+import {
+  DEFAULT_POST_IMAGE_URL,
+  DEFAULT_PROFILE_IMAGE_URL,
+} from '../../constants';
+
 import { ReactComponent as MoreIcon } from '../../assets/more.svg';
 import likeIcon from '../../assets/like.svg';
 import cancelLikeIcon from '../../assets/cancel-like.svg';
 import { ReactComponent as SaveIcon } from '../../assets/save.svg';
 
-const DEFAULT_IMAGE_URL = 'https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1300&q=80';
-
 const Preview: React.FC = () => {
-  const [imageURL, setImageURL] = useState<string>(DEFAULT_IMAGE_URL);
+  const [imageURL, setImageURL] = useState<string>(DEFAULT_POST_IMAGE_URL);
   const { data } = usePalette(imageURL);
 
   const [isPostLiked, setIsPostLiked] = useState<boolean>(false);
@@ -43,7 +46,9 @@ const Preview: React.FC = () => {
       <Wrapper>
         <PostContainer>
           <PostHeader>
-            <CreatorProfileImage src="https://scontent-ort2-2.cdninstagram.com/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-ort2-2.cdninstagram.com&_nc_ohc=NnGlYC0XQtAAX_1dvbz&oh=f2b034057d9f9cdb79563e08191b3c56&oe=5F66BB0F&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2" />
+            <CreatorProfileImage
+              src={DEFAULT_PROFILE_IMAGE_URL}
+            />
             <CreatorName>jyeo_official</CreatorName>
             <FollowButton>팔로잉</FollowButton>
             <MoreButton />
