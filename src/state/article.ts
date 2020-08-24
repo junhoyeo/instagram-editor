@@ -3,6 +3,8 @@ import {
   selector,
 } from 'recoil';
 
+const CHARACTER_LIMIT_FOR_FIRST_LINE = 120;
+
 export const articleState = atom({
   key: 'articleState',
   default: '',
@@ -18,8 +20,8 @@ export const articlePreviewState = selector({
     const articleLines = article.split('\n');
     const [firstLine] = articleLines;
 
-    if (firstLine.length > 100) {
-      return `${firstLine.slice(0, 100).trim()}...`;
+    if (firstLine.length > CHARACTER_LIMIT_FOR_FIRST_LINE) {
+      return `${firstLine.slice(0, CHARACTER_LIMIT_FOR_FIRST_LINE).trim()}...`;
     }
 
     if (articleLines.length > 1) {
