@@ -16,7 +16,7 @@ const Editor: React.FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [article, setArticle] = useRecoilState(articleState);
   const isUsernameExist = useRecoilValue(isUsernameExistState);
-  const [isSettingModalOpen, setIsSettingModalOpen] = useState<boolean>(isUsernameExist);
+  const [isSettingModalOpen, setIsSettingModalOpen] = useState<boolean>(!isUsernameExist);
 
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
     setArticle(event.target.value);

@@ -33,5 +33,5 @@ export const usernameState = selector({
 export const isUsernameExistState = selector({
   key: 'isUsernameExistState',
   get: ({ get }) =>
-    !Boolean(get(profileState)),
+    Boolean(get(usernameState)),
 });
