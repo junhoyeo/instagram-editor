@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
@@ -8,27 +8,36 @@ import getProfileImageURL from '../api/getProfileImageURL';
 
 interface ISettingModal extends ReactModal.Props {}
 
-const SettingModal: React.FC<ISettingModal> = ({ ...modalProps }) => {
+const SettingModal: React.FC<ISettingModal> = ({ onRequestClose, ...modalProps }) => {
   const [profile, setProfile] = useRecoilState<IProfile>(profileState);
+  const [username, setUsername] = useState<string>(profile.username);
+  const [isFailed, setIsFailed] = useState<boolean>(false);
 
   const onChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setProfile({
-      ...profile,
-      username: event.target.value,
-    });
+    setUsername(event.target.value.trim());
+
+  const onSubmitUsername = async (event: React.MouseEvent | React.KeyboardEvent) => {
+    const profileImageURL = await getProfileImageURL(username);
+    console.log(profileImageURL);
+
+    if (profileImageURL) {
+      setIsFailed(false);
+      setProfile({
+        username,
+        profileImageURL,
+      });
+    } else {
+      setIsFailed(true);
+    }
+
+    if (onRequestClose) {
+      onRequestClose(event);
+    }
+  };
 
   const onKeyUpUsernameInput = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      const { username } = profile;
-      const profileImageURL = await getProfileImageURL(username);
-      console.log(profileImageURL);
-
-      if (profileImageURL) {
-        setProfile({
-          ...profile,
-          profileImageURL,
-        });
-      }
+      await onSubmitUsername(event);
     }
   };
 
@@ -37,16 +46,28 @@ const SettingModal: React.FC<ISettingModal> = ({ ...modalProps }) => {
   return (
     <ReactModal
       {...modalProps}
+      onRequestClose={onRequestClose}
       style={modalStyle}
     >
       <ProfileImage
         src={profileImageURL}
       />
       <UsernameInput
-        placeholder="닉네임 입력 후 엔터"
+        placeholder="사용자 이름 입력"
         onChange={onChangeUsername}
         onKeyUp={onKeyUpUsernameInput}
       />
+      {isFailed && (
+        <ErrorMessage>
+          사용자 이름을 찾을 수 없습니다.
+        </ErrorMessage>
+      )}
+      <SubmitButton
+        onClick={onSubmitUsername}
+        isError={isFailed}
+      >
+        저장
+      </SubmitButton>
     </ReactModal>
   );
 };
@@ -68,6 +89,36 @@ const UsernameInput = styled.input`
   padding: 10px 12px;
   border-radius: 4px;
   margin-top: 12px;
+`;
+
+const ErrorMessage = styled.p`
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #f03e3e;
+`;
+
+interface ISubmitButton {
+  isError?: boolean;
+}
+
+const SubmitButton = styled.button<ISubmitButton>`
+  font-size: 16px;
+  background-color: #343a40;
+  color: #f8f9fa;
+  font-weight: bold;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: #212529;
+  }
 `;
 
 const modalStyle: object = {
