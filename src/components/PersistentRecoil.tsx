@@ -2,10 +2,9 @@ import React from 'react';
 import {
   RecoilRoot,
   MutableSnapshot,
-} from 'recoil';
-import {
+  // @ts-ignore
   useTransactionObservation_UNSTABLE,
-} from 'recoil/dist/recoil.development';
+} from 'recoil';
 
 import { articleState } from '../state/article';
 import { profileState } from '../state/profile';
