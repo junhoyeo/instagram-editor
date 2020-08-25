@@ -7,12 +7,10 @@ import {
   articlePreviewState,
   articleTextState,
 } from '../../state/article';
+import { profileImageURLState, usernameState } from '../../state/profile';
 import ImagePreview from './ImagePreview';
 
-import {
-  DEFAULT_POST_IMAGE_URL,
-  DEFAULT_PROFILE_IMAGE_URL,
-} from '../../constants';
+import { DEFAULT_POST_IMAGE_URL } from '../../constants';
 
 import { ReactComponent as MoreIcon } from '../../assets/more.svg';
 import likeIcon from '../../assets/like.svg';
@@ -27,6 +25,9 @@ const Preview: React.FC = () => {
   const [isViewMoreEnabled, setIsViewMoreEnabled] = useState<boolean>(false);
   const articlePreviewText = useRecoilValue(articlePreviewState);
   const articleText = useRecoilValue(articleTextState);
+
+  const profileImageURL = useRecoilValue(profileImageURLState);
+  const username = useRecoilValue(usernameState);
 
   const article = isViewMoreEnabled
     ? articleText
@@ -47,9 +48,9 @@ const Preview: React.FC = () => {
         <PostContainer>
           <PostHeader>
             <CreatorProfileImage
-              src={DEFAULT_PROFILE_IMAGE_URL}
+              src={profileImageURL}
             />
-            <CreatorName>jyeo_official</CreatorName>
+            <CreatorName>{username}</CreatorName>
             <FollowButton>팔로잉</FollowButton>
             <MoreButton />
           </PostHeader>
@@ -71,7 +72,7 @@ const Preview: React.FC = () => {
               </LikeStatusText>
             </LikeStatusContainer>
             <ArticleWrapper>
-              <strong>jyeo_official</strong>
+              <strong>{username}</strong>
               &nbsp;{article}
               &nbsp;
               {isViewMoreButtonShown && (

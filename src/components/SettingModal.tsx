@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
-import { DEFAULT_PROFILE_IMAGE_URL } from '../constants';
+import { profileState, IProfile } from '../state/profile';
 import getProfileImageURL from '../api/getProfileImageURL';
 
 const modalStyle: object = {
@@ -24,23 +25,30 @@ const modalStyle: object = {
 interface ISettingModal extends ReactModal.Props {}
 
 const SettingModal: React.FC<ISettingModal> = ({ ...modalProps }) => {
-  const [username, setUsername] = useState('');
-  const [profileImageURL, setProfileImageURL] = useState(DEFAULT_PROFILE_IMAGE_URL);
+  const [profile, setProfile] = useRecoilState<IProfile>(profileState);
 
   const onChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setUsername(event.target.value);
+    setProfile({
+      ...profile,
+      username: event.target.value,
+    });
 
   const onKeyUpUsernameInput = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
-      console.log(username);
-      const searchedProfileImageURL = await getProfileImageURL(username);
-      console.log(searchedProfileImageURL);
+      const { username } = profile;
+      const profileImageURL = await getProfileImageURL(username);
+      console.log(profileImageURL);
 
-      if (searchedProfileImageURL) {
-        setProfileImageURL(searchedProfileImageURL);
+      if (profileImageURL) {
+        setProfile({
+          ...profile,
+          profileImageURL,
+        });
       }
     }
   };
+
+  const { profileImageURL } = profile;
 
   return (
     <ReactModal

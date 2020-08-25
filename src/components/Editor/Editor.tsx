@@ -27,6 +27,10 @@ const Editor: React.FC = () => {
     document.execCommand('copy');
   };
 
+  const onClickOpenSettingModal = () => setIsSettingModalOpen(true);
+
+  const onClickCloseSettingModal = () => setIsSettingModalOpen(false);
+
   return (
     <Wrapper>
       <Container>
@@ -38,7 +42,7 @@ const Editor: React.FC = () => {
             onClick={onClickCopyArticle}
           />
           <SettingButton
-            onClick={() => setIsSettingModalOpen(true)}
+            onClick={onClickOpenSettingModal}
           />
         </ButtonGroupContainer>
         <Textarea
@@ -50,7 +54,7 @@ const Editor: React.FC = () => {
       </Container>
       <SettingModal
         isOpen={isSettingModalOpen}
-        onRequestClose={() => setIsSettingModalOpen(false)}
+        onRequestClose={onClickCloseSettingModal}
       />
     </Wrapper>
   );

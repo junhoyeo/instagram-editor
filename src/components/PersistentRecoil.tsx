@@ -8,11 +8,12 @@ import {
 } from 'recoil/dist/recoil.development';
 
 import { articleState } from '../state/article';
+import { profileState } from '../state/profile';
 
-const ATOMS_IN_STATE = [articleState];
+const PERSISTENT_ATOMS = [articleState, profileState];
 
 const initializeState = ({ set }: MutableSnapshot) => {
-  ATOMS_IN_STATE.forEach((atom) => {
+  PERSISTENT_ATOMS.forEach((atom) => {
     const persistedState = localStorage.getItem(atom.key);
     if (persistedState) {
       set(atom, JSON.parse(persistedState).value);
