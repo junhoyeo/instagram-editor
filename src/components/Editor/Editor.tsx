@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -9,12 +9,16 @@ import {
   CopyButton,
   SettingButton,
 } from './buttons';
-import SettingModal from '../SettingModal';
 
-const Editor: React.FC = () => {
+interface IEditor {
+  onClickOpenSettingModal?: () => void;
+}
+
+const Editor: React.FC<IEditor> = ({
+  onClickOpenSettingModal,
+}) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [article, setArticle] = useRecoilState(articleState);
-  const [isSettingModalOpen, setIsSettingModalOpen] = useState<boolean>(false);
 
   const onChangeText = (event: React.ChangeEvent<HTMLTextAreaElement>) =>
     setArticle(event.target.value);
@@ -26,10 +30,6 @@ const Editor: React.FC = () => {
     textareaRef.current?.select();
     document.execCommand('copy');
   };
-
-  const onClickOpenSettingModal = () => setIsSettingModalOpen(true);
-
-  const onClickCloseSettingModal = () => setIsSettingModalOpen(false);
 
   return (
     <Wrapper>
@@ -52,10 +52,6 @@ const Editor: React.FC = () => {
           placeholder="당신의 이야기는 무엇인가요?"
         />
       </Container>
-      <SettingModal
-        isOpen={isSettingModalOpen}
-        onRequestClose={onClickCloseSettingModal}
-      />
     </Wrapper>
   );
 };
