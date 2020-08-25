@@ -29,3 +29,9 @@ export const usernameState = selector({
   get: ({ get }) =>
     get(profileState).username,
 });
+
+export const isUsernameExistState = selector({
+  key: 'isUsernameExistState',
+  get: ({ get }) =>
+    !Boolean(get(profileState)),
+});
