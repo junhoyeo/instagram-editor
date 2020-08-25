@@ -6,22 +6,6 @@ import styled from 'styled-components';
 import { profileState, IProfile } from '../state/profile';
 import getProfileImageURL from '../api/getProfileImageURL';
 
-const modalStyle: object = {
-  content: {
-    overflow: 'unset',
-    position: 'unset',
-    width: 'fit-content',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  overlay: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-};
-
 interface ISettingModal extends ReactModal.Props {}
 
 const SettingModal: React.FC<ISettingModal> = ({ ...modalProps }) => {
@@ -85,3 +69,19 @@ const UsernameInput = styled.input`
   border-radius: 4px;
   margin-top: 12px;
 `;
+
+const modalStyle: object = {
+  content: {
+    overflow: 'unset',
+    position: 'unset',
+    width: 'fit-content',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  overlay: {
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.45)',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+};
