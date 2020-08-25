@@ -10,6 +10,7 @@
     "eject": "react-scripts eject",
     "deploy": "yarn build && gh-pages -d build"
   },
+  "homepage": "https://junhoyeo.github.io/instagram-editor",
   "dependencies": {
     "axios": "^0.20.0",
     "react": "^16.13.1",
