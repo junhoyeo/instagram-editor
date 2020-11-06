@@ -1,4 +1,6 @@
 import { atom, selector } from 'recoil';
+
+import localStorageEffect from './effects/localStorageEffect';
 import { DEFAULT_PROFILE_IMAGE_URL } from '../constants';
 
 export interface IProfile {
@@ -11,11 +13,12 @@ const initialState: IProfile = {
   username: '',
 };
 
+const key = 'profileState';
+
 export const profileState = atom({
-  key: 'profileState',
+  key,
   default: initialState,
-  // @ts-ignore
-  persistence_UNSTABLE: { type: true },
+  effects_UNSTABLE: [localStorageEffect(key)],
 });
 
 export const profileImageURLState = selector({

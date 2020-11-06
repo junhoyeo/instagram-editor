@@ -1,12 +1,15 @@
 import { atom, selector } from 'recoil';
 
+import localStorageEffect from './effects/localStorageEffect';
+
 const CHARACTER_LIMIT_FOR_FIRST_LINE = 120;
 
+const key = 'articleState';
+
 export const articleState = atom({
-  key: 'articleState',
+  key,
   default: '',
-  // @ts-ignore
-  persistence_UNSTABLE: { type: true },
+  effects_UNSTABLE: [localStorageEffect(key)],
 });
 
 export const articlePreviewState = selector({

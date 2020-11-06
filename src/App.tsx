@@ -1,18 +1,18 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil'
 
-import PersistentRecoil from './components/PersistentRecoil';
 import ServiceWrapper from './components/ServiceWrapper';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
 
 const App: React.FC = () => {
   return (
-    <PersistentRecoil>
+    <RecoilRoot>
       <ServiceWrapper>
         <Editor />
         <Preview />
       </ServiceWrapper>
-    </PersistentRecoil>
+    </RecoilRoot>
   );
 };
 
